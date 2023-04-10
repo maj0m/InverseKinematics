@@ -1,9 +1,10 @@
 class Leg {
-    constructor(parentSegment, angle, length) {
+    constructor(parentSegment, rot, length) {
       this.parentSegment = parentSegment;
-      this.angle = angle;
+      this.rot = rot;
       this.length = length;
       this.footPos = createVector(0, 0);
+      this.nextFootPos = createVector(0, 0);
     }
   
     draw() {
@@ -21,12 +22,15 @@ class Leg {
   
     move() {
       const distance = dist(this.parentSegment.pos.x, this.parentSegment.pos.y, this.footPos.x, this.footPos.y);
-  
+
       if (distance > legLen) {
-        this.footPos = createVector(
-          this.parentSegment.pos.x + this.length * cos(this.parentSegment.rot + this.angle),
-          this.parentSegment.pos.y + this.length * sin(this.parentSegment.rot + this.angle)
+        this.nextFootPos = createVector(
+          this.parentSegment.pos.x + this.length * cos(this.parentSegment.rot + this.rot),
+          this.parentSegment.pos.y + this.length * sin(this.parentSegment.rot + this.rot)
         );
       }
+
+      // Interpolate foot position gradually
+      this.footPos.lerp(this.nextFootPos, stepSpeed);
     }
   }
