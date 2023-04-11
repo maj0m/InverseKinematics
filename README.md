@@ -1,7 +1,7 @@
 Procedural Gecko Movement Simulation using Inverse Kinematics
 
     This simulation attempts to mimic the movement of a lizard / gecko using inverse kinematics.
-    The lizard is made up of segmented legs and a joint body using inverse kinematics.
+    The lizard is made up of segmented legs and a joint body that follows the mouse.
 
 How to use:
 
