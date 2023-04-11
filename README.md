@@ -13,8 +13,10 @@ Controls:
 
 Dependencies:
 
-    This simulation was built using the p5.js library, which is included in the repository. No additional dependencies are required.
+    This simulation was built using the p5.js library, which is included in the repository.
+    No additional dependencies are required.
 
 License:
 
-    This code is released under the MIT License. Feel free to use it however you like, but please credit me if you use it in a project.
+    This code is released under the MIT License. 
+    Feel free to use it however you like, but please credit me if you use it in a project.
