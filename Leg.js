@@ -19,6 +19,20 @@ class Leg {
     fill(color);
     circle(this.footPos.x, this.footPos.y, footRad * 2);
     pop();
+
+    // Draw ideal step (DEBUG);
+    // push();
+    // fill(120, 40, 70);
+    // let idealStep = this.calculateNextStep();
+    // circle(idealStep.x, idealStep.y, footRad * 2);
+    // pop();
+  }
+
+  calculateNextStep() {
+    return createVector(
+      this.parentSegment.pos.x + this.length * cos(this.parentSegment.rot + this.rot),
+      this.parentSegment.pos.y + this.length * sin(this.parentSegment.rot + this.rot)
+    );
   }
 
   move() {
@@ -27,10 +41,7 @@ class Leg {
 
     //If foot is far behind, calculate next step position
     if (distance > legLen * 1.2) {
-      this.nextFootPos = createVector(
-        this.parentSegment.pos.x + this.length * cos(this.parentSegment.rot + this.rot),
-        this.parentSegment.pos.y + this.length * sin(this.parentSegment.rot + this.rot)
-      );
+      this.nextFootPos = this.calculateNextStep();
     }
 
     // Calculating leg segments with Inverse Kinematics
@@ -40,9 +51,8 @@ class Leg {
     this.segments[0].move(this.segments[1].b.x, this.segments[1].b.y);
     
     // Interpolate between current and desired foot pos
-    this.footPos.lerp(this.nextFootPos, stepSpeed);
-
-    
-    
+    this.footPos.lerp(this.nextFootPos, stepSpeed);    
   }
+
+  
 }

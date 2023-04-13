@@ -1,7 +1,7 @@
 class BodySegment {
-  constructor(r, dist) {
+  constructor(rad, dist) {
     this.pos = createVector(0, 0);
-    this.r = r;
+    this.rad = rad;
     this.dist = dist;
     this.rot = 0;
     this.legs = [];
@@ -12,7 +12,7 @@ class BodySegment {
     push();
     fill(color);
     strokeWeight(2);
-    circle(this.pos.x, this.pos.y, this.r * 2);
+    circle(this.pos.x, this.pos.y, this.rad * 2);
     pop();
   }
 
@@ -24,6 +24,14 @@ class BodySegment {
   }
 
   setRadius(r) {
-      this.r = r;
+      this.rad = r;
   }
+
+  // ADD FORCE TO SEGMENT (Experimental)
+  addForce(force) {
+    this.pos.add(force.x, force.y);
+  }
+
+
+
 }
