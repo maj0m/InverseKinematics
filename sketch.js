@@ -10,6 +10,7 @@ const speed = 2;
 let body;
 let segments = [];
 let target;
+let footsteps = [];
 
 // Colors
 let color = [10, 153, 89, 255];
@@ -30,20 +31,24 @@ function setup() {
   }
 
   body = new Body(segments);
-  
-
   body.addLegs(4);
-  body.addLegs(14);
-
-  target =  createVector(400, 400);
-
+  body.addLegs(16);
 }
 
 // DRAW
 function draw() {
   noStroke();
   background(50);
-  body.follow(mouseX, mouseY);
+
+  // Update and Draw Footsteps
+  for(let step of footsteps) {
+    step.update();
+    step.draw();
+  }
+
+  // Update and Draw Body
+  target = createVector(mouseX, mouseY);
+  body.follow(target);
   body.draw();
 }
 
@@ -71,7 +76,7 @@ function keyPressed() {
   }
 }
 
-function mouseClicked() {
-  target.x = mouseX;
-  target.y = mouseY;
-}
+// function mouseClicked() {
+//   target.x = mouseX;
+//   target.y = mouseY;
+// }

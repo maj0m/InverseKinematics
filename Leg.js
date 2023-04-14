@@ -5,6 +5,8 @@ class Leg {
     this.length = length;
     this.footPos = createVector(0, 0); // Initial
     this.nextFootPos = createVector(0, 0); // Initial
+    this.grounded = true;
+    
     
     this.segments = [new LegSegment(3*legLen/5), new LegSegment(2*legLen/5)]; //2 leg segments for each leg
   }
@@ -25,6 +27,7 @@ class Leg {
     // fill(120, 40, 70);
     // let idealStep = this.calculateNextStep();
     // circle(idealStep.x, idealStep.y, footRad * 2);
+    // circle(this.nextFootPos.x, this.nextFootPos.y, footRad*2);
     // pop();
   }
 
@@ -35,12 +38,24 @@ class Leg {
     );
   }
 
+  groundCheck() {
+    const distance = dist(this.footPos.x, this.footPos.y, this.nextFootPos.x, this.nextFootPos.y); 
+    if(distance > 0.2) {
+      this.grounded = false;
+    } else {
+      this.grounded = true;
+    }
+  }
+
   move() {
     // Distance between parent Body Segment and current Foot Position
     const distance = dist(this.parentSegment.pos.x, this.parentSegment.pos.y, this.footPos.x, this.footPos.y);
 
     //If foot is far behind, calculate next step position
     if (distance > legLen * 1.2) {
+      let step = new FootStep(this.nextFootPos, footRad);
+      footsteps.push(step);
+
       this.nextFootPos = this.calculateNextStep();
     }
 
@@ -49,9 +64,11 @@ class Leg {
     this.segments[1].follow(this.segments[0].a);
     this.segments[1].move(this.parentSegment.pos.x, this.parentSegment.pos.y);
     this.segments[0].move(this.segments[1].b.x, this.segments[1].b.y);
-    
+
     // Interpolate between current and desired foot pos
-    this.footPos.lerp(this.nextFootPos, stepSpeed);    
+    this.footPos.lerp(this.nextFootPos, stepSpeed); 
+
+    this.groundCheck();
   }
 
   

@@ -5,21 +5,27 @@ class Body {
   }
 
   draw() {
-    for (let i = 0; i < this.segments.length; i++) {
-      const segment = this.segments[i];
+    this.drawLegs();
+    this.drawBodySegments();
+    
+  }
 
-      // Draw Legs
-      for (let leg of segment.legs) {
-        leg.draw();
-      }
-
-      // Draw Body segments
-      segment.draw();
+  drawBodySegments() {
+    for (let seg of this.segments) {
+      seg.draw();     
     }
   }
 
-  follow(targetX, targetY) {
-    let target = createVector(targetX, targetY);
+  drawLegs() {
+     // Draw Legs
+     for (let seg of this.segments) {     
+      for (let leg of seg.legs) {
+        leg.draw();
+      }
+    }
+  }
+
+  follow(target) {
     this.target.lerp(target, speed/100); 
 
     for (let i = 0; i < this.segments.length; i++) {
@@ -48,7 +54,7 @@ class Body {
   }
 
   removeLegs(segID) {
-    if( segID < segmentAmount) {
+    if( segID < this.segments.length) {
       this.segments[segID].legs = [];
     }
   }

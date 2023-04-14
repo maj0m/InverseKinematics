@@ -1,9 +1,9 @@
 class BodySegment {
   constructor(rad, dist) {
-    this.pos = createVector(0, 0);
+    this.pos = createVector(0, 0); // Initial
     this.rad = rad;
     this.dist = dist;
-    this.rot = 0;
+    this.rot = 0; // Initial
     this.legs = [];
   }
 
