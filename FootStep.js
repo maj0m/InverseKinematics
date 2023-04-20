@@ -2,7 +2,7 @@ class FootStep {
     constructor(pos, rad) {
         this.pos = pos;
         this.rad = rad;
-        this.color = [0, 0, 0, 100];
+        this.color = [0, 0, 0, 50];
         this.timeToLive = 100;
     }
 
@@ -22,7 +22,7 @@ class FootStep {
             this.delete();
         }
 
-        this.color = [0, 0, 0, this.timeToLive];
+        this.color = [0, 0, 0, this.timeToLive/2];
     }
 
     delete() {
