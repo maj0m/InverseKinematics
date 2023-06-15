@@ -5,7 +5,7 @@ Procedural Lizard Movement Simulation using Inverse Kinematics
 
 How to use:
 
-    You can try it out at: maj0m.github.io/InverseKinematics
+    You can try it out at: https://maj0m.github.io/InverseKinematics
 
 Controls:
 
